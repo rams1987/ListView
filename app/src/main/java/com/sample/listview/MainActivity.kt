@@ -2,6 +2,7 @@ package com.sample.listview
 //https://demonuts.com/android-listview-kotlin/
 //https://www.stechies.com/add-sound-play-button-click/
 
+import android.media.MediaPlayer
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -14,13 +15,14 @@ import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
-    private val a = 5
-    private val b = 10
     private var lv: ListView? = null
     private var customAdapter: CustomAdapter? = null
     private var imageModelArrayList: ArrayList<ImageModel>? = null
     private val myImageList = intArrayOf(R.drawable.benz, R.drawable.bike, R.drawable.car, R.drawable.carrera, R.drawable.ferrari, R.drawable.harly, R.drawable.lamborghini, R.drawable.silver)
     private val myImageNameList = arrayOf("Benz", "Bike", "Car", "Carrera", "Ferrari", "Harly", "Lamborghini", "Silver")
+
+    // Why are we using ? in kotlin.
+    private var mediaPlayer: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +37,9 @@ class MainActivity : AppCompatActivity() {
 
         lv!!.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, position, id ->
             Toast.makeText(this, "Click on " + imageModelArrayList!![position], Toast.LENGTH_SHORT).show()
+            mediaPlayer = MediaPlayer.create(this, R.raw.lion)
+            mediaPlayer!!.start()
+
         }
 
     }
